@@ -1,0 +1,22 @@
+---
+import LaunchCard from "../components/LaunchCard.astro";
+import { getLastestLaunches } from "../services/spaceXFetchLaunch";
+
+const launches = await getLastestLaunches();
+---
+
+<div
+  class="grid gap-16 sm:grid-cols-1 mx-6 sm:mx-6 md:grid-cols-2 lg:grid-cols-3 text-center"
+>
+  {
+    launches.map((launch) => (
+      <LaunchCard
+        id={launch.id}
+        name={launch.name}
+        img={launch.links.patch.small}
+        details={launch.details}
+        success={launch.success}
+      />
+    ))
+  }
+</div>

@@ -1,0 +1,93 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getLaunchById } from "../../services/spaceXFetchLaunch";
+
+export const prerender = false;
+
+const { id } = Astro.params;
+
+let launch;
+if (id) {
+  launch = await getLaunchById({ id });
+}
+---
+
+<Layout title=`Lanzamiento ${launch.name}`>
+  <div class="flex justify-center items-center m-6">
+    <article
+      class="rounded-xl mx-0 justify-self-center self-center m-0 border shadow-md bg-gray-900 border-gray-700
+    transition grid gap-4 grid-flow-row grid-rows-3 grid-cols-1
+    md:grid-flow-col md:grid-rows-2 md:grid-cols-2"
+    >
+      <picture
+        class="self-center justify-self-center py-4 md:row-start-1 md:col-start-1"
+      >
+        <img
+          src={launch.links.patch.small}
+          alt={`Imagen del lanzamineto ${id}`}
+        />
+      </picture>
+
+      <header
+        class="p-4 md:pr-8 md:row-start-1 md:col-start-2 row-start-2 self-center"
+      >
+        <div
+          class="flex flex-col md:flex-row items-center justify-between pb-8"
+        >
+          <span
+            class:list={[
+              "text-sm text-center font-semibold mb-4 md:mr-2 md:px-2.5 rounded",
+              {
+                "bg-green-400 text-green-900": launch.success,
+                "bg-red-400 text-red-900": !launch.success,
+              },
+            ]}
+          >
+            {launch.success ? "Exitoso" : "Fallido"}
+          </span>
+          <p class="text-right text-gray-300">
+            {new Date(launch.date_utc).toLocaleDateString()}
+          </p>
+        </div>
+        <h2 class="mt-1 text-2xl font-bold tracking-tight text-white pb-2">
+          {launch.name}
+        </h2>
+        <p class="mb-6 mt-4 font-light text-gray-400 text-pretty">
+          {
+            launch.details
+              ? launch.details + "."
+              : "No hay informacion de este Lanzamiento."
+          }
+        </p>
+        <div class="flex flex-col gap-4 md:flex-row">
+          <a
+            class="hover:text-gray-200 bg-slate-800 rounded-lg px-4 py-2 font-light tracking-widest
+              opacity-70 hover:shadow-lg hover:opacity-100 text-white text-center"
+            href=`${launch.links.article}`
+            >Articulo</a
+          >
+          <a
+            class="hover:text-gray-200 bg-slate-800 rounded-lg px-4 py-2 font-light tracking-widest
+              opacity-70 hover:shadow-lg hover:opacity-100 text-white text-center"
+            href=`${launch.links.wikipedia}`
+            >Wikipedia</a
+          >
+        </div>
+      </header>
+
+      <div class="flex flex-col col-span-2 pb-8 items-center">
+        <h4 class="pb-2">Video del Lanzamiento</h4>
+        <div class="w-4/5 h-1/3">
+          <iframe
+            width="100%"
+            height="330rem"
+            src=`https://www.youtube.com/embed/${launch.links.youtube_id}`
+            title=`Video de Youtube del Lanzamiento de "${launch.name}"`
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </article>
+  </div>
+</Layout>
