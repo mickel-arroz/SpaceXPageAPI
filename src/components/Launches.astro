@@ -1,8 +1,27 @@
 ---
 import LaunchCard from "../components/LaunchCard.astro";
-import { getLastestLaunches } from "../services/spaceXFetchLaunch";
+import {
+  getLastestLaunches,
+  getLaunchesSuccess,
+  getAllLaunches,
+} from "../services/spaceXFetchLaunch";
+import { Doc } from "../types/api";
 
-const launches = await getLastestLaunches();
+const { url } = Astro.request;
+
+let launches: Doc[];
+switch (true) {
+  case url.endsWith("/successfulLaunches"):
+    launches = await getLaunchesSuccess();
+    break;
+
+  case url.endsWith("/allLaunches"):
+    launches = await getAllLaunches();
+    break;
+
+  default:
+    launches = await getLastestLaunches();
+}
 ---
 
 <div
