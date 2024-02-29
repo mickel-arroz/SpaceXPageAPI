@@ -1,5 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
+
+import LogoWhite from "../images/LogoWhiteSpaceX.webp";
 ---
 
 <Layout title=`About`>
@@ -11,9 +14,11 @@ import Layout from "../layouts/Layout.astro";
       <picture
         class="self-center lg:self-start justify-self-center py-4 min-w-72"
       >
-        <img
-          src={`/LogoWhiteSpaceX.png`}
-          alt={`Logotipo de la pagina`}
+        <Image
+          class="justify-self-end aspect-square w-72"
+          src={LogoWhite}
+          alt="Logo API SpaceX"
+          loading="eager"
         />
       </picture>
 
@@ -42,14 +47,13 @@ import Layout from "../layouts/Layout.astro";
           <br />
           <br />
           <div class="lg:ml-16 lg:mr-24 mb-12 text-gray-400">
-            <span class="font-bold text-slate-200"> NOTA: </span>
-            Por objetivos esteticos se decidio no mostrar ningun
-            lanzamiento que no tuviera logo o parche asignado por el API
-            publica. Esto con el fin de resultar mas atractiva visualmente la
-            pagina. Otra forma de solucionar esto es creando un logo por defecto
-            que se les mostrara en los lanzamientos que no tengan logo
-            predefinido, pero debido a que hay una buena cantidad de
-            lanzamientos sin logo, se decidio por efectos visuales, mostrar solo
+            <span class="font-bold text-slate-200"> NOTA:</span>
+            Por objetivos esteticos se decidio no mostrar ningun lanzamiento que
+            no tuviera logo o parche asignado por el API publica. Esto con el fin
+            de resultar mas atractiva visualmente la pagina. Otra forma de solucionar
+            esto es creando un logo por defecto que se les mostrara en los lanzamientos
+            que no tengan logo predefinido, pero debido a que hay una buena cantidad
+            de lanzamientos sin logo, se decidio por efectos visuales, mostrar solo
             los lanzamientos que posean logo predefinido.
           </div>
 

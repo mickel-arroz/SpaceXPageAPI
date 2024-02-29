@@ -1,6 +1,6 @@
 import type { Doc, SpaceXLaunches } from "../types/api";
 
-const spaceXAPI = "https://api.spacexdata.com/v5/launches";
+export const spaceXAPI = "https://api.spacexdata.com/v5/launches";
 
 
 
@@ -17,14 +17,14 @@ body: JSON.stringify({
     sort: {
       date_unix: "desc",
     },
-    limit: 50,
+    limit: 100,
   },
 }),
 });
 
   const { docs } = (await res.json()) as SpaceXLaunches;
 
-  const launches = docs.filter((launch) => launch.links.patch.small);
+  const launches = docs.filter((launch) => launch.links.patch.small && launch.details);
 
   return launches;
 
@@ -55,14 +55,14 @@ export const getLaunchesSuccess = async () => {
         sort: {
           date_unix: "asc",
         },
-        limit: 100,
+        limit: 2000,
       },
     }),
     });
 
   const { docs: launches  } = (await res.json()) as SpaceXLaunches;
 
-  const successLaunches = launches.filter((launch) => launch.success && launch.links.patch.small);
+  const successLaunches = launches.filter((launch) => launch.success && launch.links.patch.small && launch.details);
 
   return successLaunches;
 
@@ -82,12 +82,12 @@ export const getAllLaunches = async () => {
         sort: {
           date_unix: "asc",
         },
-        limit: 1000,
+        limit: 9999,
       },
     }),
     });
 
-  const { docs  } = (await res.json()) as SpaceXLaunches;
+  const { docs } = (await res.json()) as SpaceXLaunches;
   
   const launches = docs.filter((launch) => launch.links.patch.small);
 

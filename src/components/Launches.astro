@@ -1,34 +1,15 @@
 ---
 import LaunchCard from "../components/LaunchCard.astro";
-import {
-  getLastestLaunches,
-  getLaunchesSuccess,
-  getAllLaunches,
-} from "../services/spaceXFetchLaunch";
 import { Doc } from "../types/api";
 
-const { url } = Astro.request;
-
-let launches: Doc[];
-switch (true) {
-  case url.endsWith("/successfulLaunches"):
-    launches = await getLaunchesSuccess();
-    break;
-
-  case url.endsWith("/allLaunches"):
-    launches = await getAllLaunches();
-    break;
-
-  default:
-    launches = await getLastestLaunches();
-}
+const { launches } = Astro.props;
 ---
 
 <div
   class="grid gap-16 sm:grid-cols-1 mx-6 sm:mx-6 md:grid-cols-2 lg:grid-cols-3 text-center"
 >
   {
-    launches.map((launch) => (
+    launches.map((launch: Doc) => (
       <LaunchCard
         id={launch.id}
         name={launch.name}

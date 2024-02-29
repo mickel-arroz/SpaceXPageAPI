@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
   id: string;
   name: string;
@@ -13,17 +15,24 @@ const successText = success ? "Exitoso" : "Fallido";
 ---
 
 <a
-  href={`launch/${id}`}
+  href={`https://dainty-meringue-77fe48.netlify.app/launch/${id}`}
   class="rounded-xl border shadow-md bg-gray-800 border-gray-700
   hover:scale-105 hover:bg-gray-700 transition flex flex-col"
 >
-  <picture class="flex justify-center p-4 h-72">
-    <img
-      class="self-center"
-      src={img}
-      alt={`Imagen del lanzamineto: ${name}`}
-    />
-  </picture>
+  {
+    img != null && (
+      <picture class="flex justify-center p-8">
+        <Image
+          class="self-center aspect-square"
+          src={img}
+          alt={`Imagen del lanzamineto: ${name}`}
+          loading="lazy"
+          width="288"
+          height="288"
+        />
+      </picture>
+    )
+  }
 
   <header class="p-4 flex-grow">
     <span
@@ -46,7 +55,7 @@ const successText = success ? "Exitoso" : "Fallido";
           ? details?.length > 80
             ? details?.slice(0, 100) + "..."
             : details + "."
-          : "No hay informacion de este Lanzamiento."
+          : "No hay detalles de este Lanzamiento."
       }
     </p>
   </header>

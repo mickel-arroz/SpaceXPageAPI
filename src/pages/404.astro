@@ -1,5 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import LayoutVacio from "../layouts/LayoutVacio.astro";
+
+import SpaceX404 from "../images/SpaceX404.webp";
 ---
 
 <LayoutVacio title="Error 404 Not Found">
@@ -10,10 +13,11 @@ import LayoutVacio from "../layouts/LayoutVacio.astro";
     <h1 class="text-white text-4xl text-center mb-4">
       Esta pagina no existe...
     </h1>
-    <img
-      src="/SpaceX404.png"
-      alt="Page not found"
-      width="30%"
+    <Image
+      class="justify-self-end aspect-square w-72"
+      src={SpaceX404}
+      alt="Logo API SpaceX"
+      loading="eager"
     />
   </div>
 </LayoutVacio>

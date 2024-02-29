@@ -1,16 +1,19 @@
 ---
+import { Image } from "astro:assets";
 import HeaderButton from "./HeaderButton.astro";
+
+import LogoWhite from "../images/LogoWhiteSpaceX.webp";
 ---
 
 <header class="px-4 mx-auto lg:px-6 mt-8 mb-16">
   <div
     class="flex flex-col md:flex-row items-center justify-center mx-auto text-center mb-8"
   >
-    <img
-      class="justify-self-end"
-      src="/LogoWhiteSpaceX.png"
+    <Image
+      class="justify-self-end aspect-square w-72"
+      src={LogoWhite}
       alt="Logo API SpaceX"
-      width="200px"
+      loading="eager"
     />
     <div>
       <h2

@@ -1,8 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Launches from "../components/Launches.astro";
+import { getAllLaunches } from "../services/spaceXFetchLaunch";
+
+const launches = await getAllLaunches();
 ---
 
 <Layout title="Todos los Lanzamientos SpaceX">
-  <Launches />
+  <Launches launches={launches} />
 </Layout>
