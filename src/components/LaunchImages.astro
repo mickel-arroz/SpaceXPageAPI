@@ -9,7 +9,7 @@ interface Props {
 const { gallery, name } = Astro.props;
 ---
 
-<h4 class="text-center pb-6">Imagenes del Lanzamiento</h4>
+<h4 class="text-center pb-6">Imágenes del Lanzamiento</h4>
 
 <div
   class="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 justify-center items-center pb-10"
@@ -21,6 +21,7 @@ const { gallery, name } = Astro.props;
           <a
             href={img}
             class="hover:scale-105 flex mx-auto"
+            target="_blank"
           >
             <picture class="aspect-square min-w-60">
               <Image
